@@ -6,13 +6,13 @@
 #    By: dlorenzo <dlorenzo@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/01 21:25:48 by dlorenzo          #+#    #+#              #
-#    Updated: 2025/05/01 22:38:09 by dlorenzo         ###   ########.fr        #
+#    Updated: 2025/05/02 20:39:08 by dlorenzo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= push_swap
 CHECKER			= checker
-TEST			= test
+TEST			= test_program
 
 LIBFT_DIR		= libft
 LIBFT			= $(LIBFT_DIR)/libft.a
@@ -41,13 +41,13 @@ PUSH_SWAP_SRCS	= $(PUSH_SWAP_DIR)/push_swap.c \
 				  $(SHARED_DIR)/stack_operations.c \
 				  $(SHARED_DIR)/input_validation.c \
 				  $(SHARED_DIR)/utils.c \
-				  $(SHARED_DIR)/list_utils.c
+				  $(SHARED_DIR)/stack_utils.c
 
 CHECKER_SRCS	= $(CHECKER_DIR)/checker.c \
 				  $(SHARED_DIR)/stack_operations.c \
 				  $(SHARED_DIR)/input_validation.c \
 				  $(SHARED_DIR)/utils.c \
-				  $(SHARED_DIR)/list_utils.c
+				  $(SHARED_DIR)/stack_utils.c
 
 BONUS_SRCS		= $(BONUS_DIR)/debug.c \
 				  $(BONUS_DIR)/color.c
@@ -59,14 +59,15 @@ TEST_SRCS		= $(TEST_DIR)/test.c \
 				  $(PUSH_SWAP_DIR)/sort_medium.c \
 				  $(PUSH_SWAP_DIR)/sort_large.c \
 				  $(SHARED_DIR)/utils.c \
-				  $(SHARED_DIR)/list_utils.c
+				  $(SHARED_DIR)/stack_utils.c
 
 # Object files
 PUSH_SWAP_OBJS	= $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o,$(PUSH_SWAP_SRCS))
 CHECKER_OBJS	= $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o,$(CHECKER_SRCS))
 BONUS_OBJS		= $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o,$(BONUS_SRCS))
 TEST_OBJS		= $(patsubst $(TEST_DIR)/%.c,$(OBJS_DIR)/%.o,$(filter $(TEST_DIR)/%,$(TEST_SRCS))) \
-				  $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o,$(filter $(SRCS_DIR)/%,$(TEST_SRCS)))
+				  $(patsubst $(SHARED_DIR)/%.c,$(OBJS_DIR)/shared/%.o,$(filter $(SHARED_DIR)/%,$(TEST_SRCS))) \
+				  $(patsubst $(PUSH_SWAP_DIR)/%.c,$(OBJS_DIR)/push_swap/%.o,$(filter $(PUSH_SWAP_DIR)/%,$(TEST_SRCS)))
 
 # Colors
 GREEN			= \033[0;32m
@@ -100,6 +101,10 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 				@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJS_DIR)/%.o: $(TEST_DIR)/%.c
+				@mkdir -p $(dir $@)
+				@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(OBJS_DIR)/%.o: $(SHARED_DIR)/%.c
 				@mkdir -p $(dir $@)
 				@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 

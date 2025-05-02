@@ -6,14 +6,14 @@
 /*   By: dlorenzo <dlorenzo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:28:08 by dlorenzo          #+#    #+#             */
-/*   Updated: 2025/05/01 22:24:30 by dlorenzo         ###   ########.fr       */
+/*   Updated: 2025/05/02 20:13:43 by dlorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
-void	print_stack(t_list *stack, const char *name)
+void	print_stack(t_stack_node *stack, const char *name)
 {
 	printf("%s: ", name);
 	while (stack)
@@ -24,7 +24,7 @@ void	print_stack(t_list *stack, const char *name)
 	printf("\n");
 }
 
-void	test_stack_operations(void)
+void test_stack_operations(void)
 {
 	t_stack	stack;
 	int		nums[] = {3, 1, 4, 2};
@@ -33,7 +33,7 @@ void	test_stack_operations(void)
 	stack.a = NULL;
 	stack.b = NULL;
 	for (int i = 0; i < 4; i++)
-		ft_lstadd_back(&stack.a, ft_lstnew(&nums[i]));
+		stack_add_back(&stack.a, new_stack_node(nums[i]));
 
 	printf("Initial state:\n");
 	print_stack(stack.a, "A");
@@ -50,11 +50,10 @@ void	test_stack_operations(void)
 	print_stack(stack.b, "B");
 
 	// Add more test cases...
-
 	free_stack(&stack);
 }
 
-void	test_sort_small(void)
+void test_sort_small(void)
 {
 	t_stack	stack;
 	int		nums[] = {3, 1, 4, 2};
@@ -63,7 +62,7 @@ void	test_sort_small(void)
 	stack.a = NULL;
 	stack.b = NULL;
 	for (int i = 0; i < 4; i++)
-		ft_lstadd_back(&stack.a, ft_lstnew(&nums[i]));
+		stack_add_back(&stack.a, new_stack_node(nums[i]));
 
 	printf("Before sort:\n");
 	print_stack(stack.a, "A");

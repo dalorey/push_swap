@@ -6,7 +6,7 @@
 /*   By: dlorenzo <dlorenzo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 19:47:58 by dlorenzo          #+#    #+#             */
-/*   Updated: 2025/01/07 14:23:00 by dlorenzo         ###   ########.fr       */
+/*   Updated: 2025/05/02 18:41:55 by dlorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,14 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int num, int fd);
 char	**ft_split(char const *str, char c);
 
+// Bonus list structure
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }				t_list;
 
+// Bonus functions
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);
