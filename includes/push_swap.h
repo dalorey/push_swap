@@ -6,7 +6,7 @@
 /*   By: dlorenzo <dlorenzo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:27:11 by dlorenzo          #+#    #+#             */
-/*   Updated: 2025/05/02 20:24:42 by dlorenzo         ###   ########.fr       */
+/*   Updated: 2025/05/03 21:23:19 by dlorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 
 typedef struct s_stack_node
 {
-	int						value;      // Original input value
-	int						index;      // Normalized index
-	struct s_stack_node		*next;      // Required for operations
-	struct s_stack_node		*prev;      // Required for reverse ops (rra, rrb)
+	int	value;	// Original input value
+	int	index;	// Normalized index
+	struct s_stack_node	*next;	// Required for operations
+	struct s_stack_node	*prev;	// Required for reverse ops (rra, rrb)
 }	t_stack_node;
 
 typedef struct s_stack

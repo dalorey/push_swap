@@ -6,7 +6,7 @@
 /*   By: dlorenzo <dlorenzo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 19:53:01 by dlorenzo          #+#    #+#             */
-/*   Updated: 2025/05/02 20:59:23 by dlorenzo         ###   ########.fr       */
+/*   Updated: 2025/05/03 21:50:25 by dlorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,17 @@
  */
 int	get_stack_value(t_stack_node *node)
 {
-    if (!node)
-        return (0); // Return 0 if the node is NULL
-    return (node->value);
+	if (!node)
+		return (0); // Return 0 if the node is NULL
+	return (node->value);
 }
 
+/**
+ * new_stack_node - Creates a new stack node with a given value.
+ * @value: The value to store in the new node.
+ *
+ * Return: A pointer to the newly created node, or NULL if memory allocation fails.
+ */
 t_stack_node *new_stack_node(int value)
 {
 	t_stack_node *node;
@@ -39,6 +45,13 @@ t_stack_node *new_stack_node(int value)
 	return (node);
 }
 
+/**
+ * stack_add_back - Adds a new node to the end of a stack.
+ * @stack: Double pointer to the head of the stack.
+ * @new_node: Pointer to the new node to add.
+ *
+ * Return: None.
+ */
 void stack_add_back(t_stack_node **stack, t_stack_node *new_node)
 {
 	t_stack_node *current;
@@ -46,7 +59,7 @@ void stack_add_back(t_stack_node **stack, t_stack_node *new_node)
 	if (!*stack)
 	{
 		*stack = new_node;
-		return;
+		return ;
 	}
 	current = *stack;
 	while (current->next)

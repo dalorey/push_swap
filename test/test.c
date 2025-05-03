@@ -6,7 +6,7 @@
 /*   By: dlorenzo <dlorenzo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:28:08 by dlorenzo          #+#    #+#             */
-/*   Updated: 2025/05/02 20:13:43 by dlorenzo         ###   ########.fr       */
+/*   Updated: 2025/05/03 22:11:21 by dlorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,19 @@ void	print_stack(t_stack_node *stack, const char *name)
 	printf("\n");
 }
 
-void test_stack_operations(void)
+void	test_stack_operations(void)
 {
 	t_stack	stack;
-	int		nums[] = {3, 1, 4, 2};
+	int		nums_a[] = {3, 1, 4, 2};
+	int		nums_b[] = {33, 11, 44, 22};
 
 	// Initialize stack
 	stack.a = NULL;
 	stack.b = NULL;
 	for (int i = 0; i < 4; i++)
-		stack_add_back(&stack.a, new_stack_node(nums[i]));
+		stack_add_back(&stack.a, new_stack_node(nums_a[i]));
+	for (int i = 0; i < 4; i++)
+		stack_add_back(&stack.b, new_stack_node(nums_b[i]));
 
 	printf("Initial state:\n");
 	print_stack(stack.a, "A");
@@ -44,18 +47,47 @@ void test_stack_operations(void)
 	sa(&stack, 1);
 	print_stack(stack.a, "A");
 
+	printf("\nTesting sb:\n");
+	sb(&stack, 1);
+	print_stack(stack.b, "B");
+
+	printf("\nTesting pa:\n");
+	pa(&stack, 1);
+	print_stack(stack.a, "A");
+	print_stack(stack.b, "B");
+
 	printf("\nTesting pb:\n");
 	pb(&stack, 1);
 	print_stack(stack.a, "A");
 	print_stack(stack.b, "B");
 
-	// Add more test cases...
+	printf("\nTesting ra:\n");
+	ra(&stack, 1);
+	print_stack(stack.a, "A");
+	print_stack(stack.b, "B");
+
+	printf("\nTesting rb:\n");
+	rb(&stack, 1);
+	print_stack(stack.a, "A");
+	print_stack(stack.b, "B");
+
+	printf("\nTesting rra:\n");
+	rra(&stack, 1);
+	print_stack(stack.a, "A");
+	print_stack(stack.b, "B");
+
+	printf("\nTesting rrb:\n");
+	rrb(&stack, 1);
+	print_stack(stack.a, "A");
+	print_stack(stack.b, "B");
+
 	free_stack(&stack);
 }
 
-void test_sort_small(void)
+void	test_sort_small(void)
 {
 	t_stack	stack;
+	//int		nums[] = {4, 3, 2, 1}; // does not sort with largest at the beginning
 	int		nums[] = {3, 1, 4, 2};
 
 	// Initialize stack
