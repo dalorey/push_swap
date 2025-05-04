@@ -6,7 +6,7 @@
 /*   By: dlorenzo <dlorenzo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 22:18:41 by dlorenzo          #+#    #+#             */
-/*   Updated: 2025/05/03 21:11:13 by dlorenzo         ###   ########.fr       */
+/*   Updated: 2025/05/04 19:35:52 by dlorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	free_stack(t_stack *stack)
 
 	if (!stack)
 		return ;
-
 	// Free all nodes in stack A
 	current = stack->a;
 	while (current)
@@ -33,7 +32,6 @@ void	free_stack(t_stack *stack)
 		current = next;
 	}
 	stack->a = NULL;
-
 	// Free all nodes in stack B
 	current = stack->b;
 	while (current)
@@ -53,8 +51,9 @@ void	free_stack(t_stack *stack)
  */
 int	stack_size(t_stack_node *stack)
 {
-	int	size = 0;
+	int	size;
 
+	size = 0;
 	while (stack)
 	{
 		size++;

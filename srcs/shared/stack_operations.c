@@ -6,7 +6,7 @@
 /*   By: dlorenzo <dlorenzo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 22:18:23 by dlorenzo          #+#    #+#             */
-/*   Updated: 2025/05/03 21:41:16 by dlorenzo         ###   ########.fr       */
+/*   Updated: 2025/05/04 18:58:21 by dlorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	sa(t_stack *stack, int print)
 		return ;
 	first = stack->a;
 	second = stack->a->next;
-
 	// Swap the first two nodes
 	first->next = second->next;
 	if (second->next)
@@ -35,7 +34,6 @@ void	sa(t_stack *stack, int print)
 	second->prev = NULL;
 	second->next = first;
 	first->prev = second;
-
 	// Update the head of stack A
 	stack->a = second;
 
@@ -57,7 +55,6 @@ void	sb(t_stack *stack, int print)
 		return ;
 	first = stack->b;
 	second = stack->b->next;
-
 	// Swap the first two nodes
 	first->next = second->next;
 	if (second->next)
@@ -65,7 +62,6 @@ void	sb(t_stack *stack, int print)
 	second->prev = NULL;
 	second->next = first;
 	first->prev = second;
-
 	// Update the head of stack B
 	stack->b = second;
 
@@ -85,12 +81,10 @@ void	pa(t_stack *stack, int print)
 	if (!stack || !stack->b)
 		return ;
 	top_b = stack->b;
-
 	// Update stack B
 	stack->b = top_b->next;
 	if (stack->b)
 		stack->b->prev = NULL;
-
 	// Push the node to stack A
 	top_b->next = stack->a;
 	if (stack->a)
@@ -113,12 +107,10 @@ void	pb(t_stack *stack, int print)
 	if (!stack || !stack->a)
 		return ;
 	top_a = stack->a;
-
 	// Update stack A
 	stack->a = top_a->next;
 	if (stack->a)
 		stack->a->prev = NULL;
-
 	// Push the node to stack B
 	top_a->next = stack->b;
 	if (stack->b)
@@ -142,12 +134,10 @@ void	ra(t_stack *stack, int print)
 	if (!stack || !stack->a || !stack->a->next)
 		return ;
 	first = stack->a;
-
 	// Find the last node
 	last = stack->a;
 	while (last->next)
 		last = last->next;
-
 	// Update pointers to rotate
 	stack->a = first->next;
 	stack->a->prev = NULL;
@@ -172,12 +162,10 @@ void	rb(t_stack *stack, int print)
 	if (!stack || !stack->b || !stack->b->next)
 		return ;
 	first = stack->b;
-
 	// Find the last node
 	last = stack->b;
 	while (last->next)
 		last = last->next;
-
 	// Update pointers to rotate
 	stack->b = first->next;
 	stack->b->prev = NULL;
@@ -201,13 +189,11 @@ void	rra(t_stack *stack, int print)
 
 	if (!stack || !stack->a || !stack->a->next)
 		return ;
-
 	// Find the last and second-to-last nodes
 	last = stack->a;
 	while (last->next)
 		last = last->next;
 	second_last = last->prev;
-
 	// Update pointers to rotate
 	second_last->next = NULL;
 	last->prev = NULL;
@@ -231,13 +217,11 @@ void	rrb(t_stack *stack, int print)
 
 	if (!stack || !stack->b || !stack->b->next)
 		return ;
-
 	// Find the last and second-to-last nodes
 	last = stack->b;
 	while (last->next)
 		last = last->next;
 	second_last = last->prev;
-
 	// Update pointers to rotate
 	second_last->next = NULL;
 	last->prev = NULL;

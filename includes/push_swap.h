@@ -6,7 +6,7 @@
 /*   By: dlorenzo <dlorenzo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:27:11 by dlorenzo          #+#    #+#             */
-/*   Updated: 2025/05/03 21:23:19 by dlorenzo         ###   ########.fr       */
+/*   Updated: 2025/05/04 18:53:58 by dlorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 typedef struct s_stack_node
 {
-	int	value;	// Original input value
-	int	index;	// Normalized index
+	int					value;	// Original input value
+	int					index;	// Normalized index
 	struct s_stack_node	*next;	// Required for operations
 	struct s_stack_node	*prev;	// Required for reverse ops (rra, rrb)
 }	t_stack_node;
@@ -33,43 +33,43 @@ typedef struct s_stack
 }	t_stack;
 
 // Input validation
-int		validate_args(int argc, char **argv);
-int		has_duplicates(t_stack_node *stack);
-int		is_sorted(t_stack_node *stack);
+int				validate_args(int argc, char **argv);
+int				has_duplicates(t_stack_node *stack);
+int				is_sorted(t_stack_node *stack);
 
 // Stack operations
-void	sa(t_stack *stack, int print);
-void	sb(t_stack *stack, int print);
-void	ss(t_stack *stack, int print);
-void	pa(t_stack *stack, int print);
-void	pb(t_stack *stack, int print);
-void	ra(t_stack *stack, int print);
-void	rb(t_stack *stack, int print);
-void	rr(t_stack *stack, int print);
-void	rra(t_stack *stack, int print);
-void	rrb(t_stack *stack, int print);
-void	rrr(t_stack *stack, int print);
+void			sa(t_stack *stack, int print);
+void			sb(t_stack *stack, int print);
+void			ss(t_stack *stack, int print);
+void			pa(t_stack *stack, int print);
+void			pb(t_stack *stack, int print);
+void			ra(t_stack *stack, int print);
+void			rb(t_stack *stack, int print);
+void			rr(t_stack *stack, int print);
+void			rra(t_stack *stack, int print);
+void			rrb(t_stack *stack, int print);
+void			rrr(t_stack *stack, int print);
 
 // Sorting algorithms
-void	sort_stack(t_stack *stack);
-void	sort_small(t_stack *stack, int size);
-void	sort_medium(t_stack *stack, int size);
-void	sort_large(t_stack *stack, int size);
+void			sort_stack(t_stack *stack);
+void			sort_small(t_stack *stack, int size);
+void			sort_medium(t_stack *stack, int size);
+void			sort_large(t_stack *stack, int size);
 
 // Stack utilities
 t_stack_node	*create_stack(int argc, char **argv);
+t_stack_node	*new_stack_node(int value);
 void			normalize_stack(t_stack_node *stack);
 int				get_stack_value(t_stack_node *node);
 void			set_stack_value(t_stack_node *node, int value);
-t_stack_node	*new_stack_node(int value);
 void			stack_add_back(t_stack_node **stack, t_stack_node *new_node);
 
 // Utils
-void	error_exit(t_stack *stack);
-void	free_stack(t_stack *stack);
-int		stack_size(t_stack_node *stack);
-int		get_min(t_stack_node *stack);
-int		get_max(t_stack_node *stack);
-int		get_position(t_stack_node *stack, int value);
+void			error_exit(t_stack *stack);
+void			free_stack(t_stack *stack);
+int				stack_size(t_stack_node *stack);
+int				get_min(t_stack_node *stack);
+int				get_max(t_stack_node *stack);
+int				get_position(t_stack_node *stack, int value);
 
 #endif

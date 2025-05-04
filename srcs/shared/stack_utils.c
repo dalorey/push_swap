@@ -6,7 +6,7 @@
 /*   By: dlorenzo <dlorenzo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 19:53:01 by dlorenzo          #+#    #+#             */
-/*   Updated: 2025/05/03 21:50:25 by dlorenzo         ###   ########.fr       */
+/*   Updated: 2025/05/04 19:38:53 by dlorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ int	get_stack_value(t_stack_node *node)
  * new_stack_node - Creates a new stack node with a given value.
  * @value: The value to store in the new node.
  *
- * Return: A pointer to the newly created node, or NULL if memory allocation fails.
+ * Return: A pointer to the newly created node, or NULL if mem allocation fails.
  */
-t_stack_node *new_stack_node(int value)
+t_stack_node	*new_stack_node(int value)
 {
-	t_stack_node *node;
+	t_stack_node	*node;
 
 	node = malloc(sizeof(t_stack_node));
 	if (!node)
@@ -52,9 +52,9 @@ t_stack_node *new_stack_node(int value)
  *
  * Return: None.
  */
-void stack_add_back(t_stack_node **stack, t_stack_node *new_node)
+void	stack_add_back(t_stack_node **stack, t_stack_node *new_node)
 {
-	t_stack_node *current;
+	t_stack_node	*current;
 
 	if (!*stack)
 	{
