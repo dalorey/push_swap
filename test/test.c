@@ -6,7 +6,7 @@
 /*   By: dlorenzo <dlorenzo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:28:08 by dlorenzo          #+#    #+#             */
-/*   Updated: 2025/05/04 21:08:56 by dlorenzo         ###   ########.fr       */
+/*   Updated: 2025/05/07 22:16:48 by dlorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,24 @@ void	print_stack(t_stack_node *stack, const char *name)
 	while (stack)
 	{
 		printf("%d ", get_stack_value(stack));
+		stack = stack->next;
+	}
+	printf("\n");
+}
+
+/**
+ * print_stack_index - Prints the index of a stack.
+ * @stack: Pointer to the head of the stack (linked list).
+ * @name: Name of the stack to be printed (e.g., "A" or "B").
+ *
+ * Iterates through stack & prints each element's index, followed by a newline.
+ */
+void	print_stack_index(t_stack_node *stack, const char *name)
+{
+	printf("%s: ", name);
+	while (stack)
+	{
+		printf("%d ", get_stack_index(stack));
 		stack = stack->next;
 	}
 	printf("\n");
@@ -126,7 +144,8 @@ void	test_stack_operations(void)
 void	test_sort_small(void)
 {
 	t_stack	stack;
-	int		nums_a[] = {2, 3, 1, 5, 4};
+//	int		nums_a[] = {2, 3, 1, 5, 4};
+	int		nums_a[] = {-22, 33, 11, 55, 44};
 
 	// Initialize stack
 	stack.a = NULL;
@@ -137,10 +156,49 @@ void	test_sort_small(void)
 	printf("Before sort:\n");
 	print_stack(stack.a, "A");
 
+	// Normalize stack
+	normalize_stack(stack.a);
+	printf("Normalized stack index:\n");
+	print_stack_index(stack.a, "A");
+
 	sort_small(&stack, array_length(nums_a, sizeof(nums_a)));
 
 	printf("After sort:\n");
 	print_stack(stack.a, "A");
+	printf("Normalized stack index:\n");
+	print_stack_index(stack.a, "A");
+
+	free_stack(&stack);
+}
+
+void	test_sort_medium(void)
+{
+	t_stack	stack;
+//	int		nums_a[] = {2, 3, 1, 5, 4, 7};
+//	int		nums_a[] = {-22, 33, 11, 55, 44, 77};
+//	int		nums_a[] = {-22, 33, 11, 55, 44, 77, 99, 88, 66, 22, 0, -11, -33, -55, -44, -77};
+	int		nums_a[] = {-22, 33, 11, 55, 44, 77, 99, 88, 66, 22, 0, -11, -33, -55, -44, -77, -99, -88, -66, -42};
+
+	// Initialize stack
+	stack.a = NULL;
+	stack.b = NULL;
+	for (int i = 0; i < array_length(nums_a, sizeof(nums_a)); i++)
+		stack_add_back(&stack.a, new_stack_node(nums_a[i]));
+
+	printf("Before sort:\n");
+	print_stack(stack.a, "A");
+
+	// Normalize stack
+	normalize_stack(stack.a);
+	printf("Normalized stack index:\n");
+	print_stack_index(stack.a, "A");
+
+	sort_medium(&stack, array_length(nums_a, sizeof(nums_a)));
+
+	printf("After sort:\n");
+	print_stack(stack.a, "A");
+	printf("Normalized stack index:\n");
+	print_stack_index(stack.a, "A");
 
 	free_stack(&stack);
 }
@@ -154,6 +212,9 @@ int	main(void)
 
 	printf("\n=== Testing small sort ===\n");
 	test_sort_small();
+
+	printf("\n=== Testing medium sort ===\n");
+	test_sort_medium();
 
 	// Add more test calls...
 

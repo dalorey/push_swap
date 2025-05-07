@@ -6,7 +6,7 @@
 /*   By: dlorenzo <dlorenzo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 22:17:48 by dlorenzo          #+#    #+#             */
-/*   Updated: 2025/05/04 20:59:14 by dlorenzo         ###   ########.fr       */
+/*   Updated: 2025/05/07 20:17:36 by dlorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ void	sort_small(t_stack *stack, int size)
 
 	if (size == 2)
 	{
-		if (stack->a->value > stack->a->next->value)
+		if (stack->a->index > stack->a->next->index)
 			sa(stack, 1); // Swap if the two elements are out of order
 	}
 	else if (size == 3)
 	{
-		first = stack->a->value;
-		second = stack->a->next->value;
-		third = stack->a->next->next->value;
+		first = stack->a->index;
+		second = stack->a->next->index;
+		third = stack->a->next->next->index;
 		if (first > second && second < third && first < third)
 			sa(stack, 1); // Case: 2 1 3 -> 1 2 3
 		else if (first > second && second < third && first > third)
@@ -55,7 +55,7 @@ void	sort_small(t_stack *stack, int size)
 		// Push elements from A to B until only 3 remain in A
 		while (stack_size(stack->a) > 3)
 		{
-			if (stack->a->value > stack->a->next->value)
+			if (stack->a->index > stack->a->next->index)
 				rra(stack, 1); /// CHECK IF THIS IS CORRECT?????
 			else
 				pb(stack, 1);
@@ -63,12 +63,12 @@ void	sort_small(t_stack *stack, int size)
 			// Sort the remaining 3 elements in A
 		sort_small(stack, 3);
 		// Sort stack B (if it contains 2 elements, sort them)
-		if (stack_size(stack->b) == 2 && stack->b->value > stack->b->next->value)
+		if (stack_size(stack->b) == 2 && stack->b->index > stack->b->next->index)
 			sb(stack, 1);
 		// Push elements back from B to A in sorted order
 		while (stack->b)
 		{
-			if (stack->b->value < stack->a->value)
+			if (stack->b->index < stack->a->index)
 				pa(stack, 1); // Push from B to A if B's top is smaller
 			else
 				ra(stack, 1); // Rotate A to find the correct position

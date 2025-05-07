@@ -6,7 +6,7 @@
 /*   By: dlorenzo <dlorenzo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 22:18:23 by dlorenzo          #+#    #+#             */
-/*   Updated: 2025/05/04 18:58:21 by dlorenzo         ###   ########.fr       */
+/*   Updated: 2025/05/07 21:17:14 by dlorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,46 @@ void	rb(t_stack *stack, int print)
 }
 
 /**
+ * rr - Rotates both stacks A and B upwards (calls ra+rb but counts as one operation)
+ * @stack: Pointer to the stack structure
+ * @print: If non-zero, prints "rr" (but only if both rotations occurred)
+ */
+void    rr(t_stack *stack, int print)
+{
+	int a_rotated = 0;
+	int b_rotated = 0;
+
+	if (!stack)
+		return;
+
+	// Check if we can rotate A
+	if (stack->a && stack->a->next)
+	{
+		ra(stack, 0);  // Silent rotation
+		a_rotated = 1;
+	}
+
+	// Check if we can rotate B
+	if (stack->b && stack->b->next)
+	{
+		rb(stack, 0);  // Silent rotation
+		b_rotated = 1;
+	}
+
+	// Only print if both rotations happened
+	if (print && a_rotated && b_rotated)
+		printf("rr\n");
+	else if (print)
+	{
+		// Undo partial rotation if only one stack was rotated
+		if (a_rotated)
+			rra(stack, 0);
+		if (b_rotated)
+			rrb(stack, 0);
+	}
+}
+
+/**
  * rra - Rotates stack A downwards (last element becomes the first).
  * @stack: Pointer to the stack structure.
  * @print: If non-zero, prints the operation name.
@@ -231,4 +271,44 @@ void	rrb(t_stack *stack, int print)
 
 	if (print)
 		printf("rrb\n");
+}
+
+/**
+ * rrr - Reverse rotates both stacks A and B (calls rra+rrb but counts as one operation)
+ * @stack: Pointer to the stack structure
+ * @print: If non-zero, prints "rrr" (only if both rotations occurred)
+ */
+void    rrr(t_stack *stack, int print)
+{
+	int a_rotated = 0;
+	int b_rotated = 0;
+
+	if (!stack)
+		return;
+
+	// Check if we can reverse rotate A
+	if (stack->a && stack->a->next)
+	{
+		rra(stack, 0);  // Silent rotation
+		a_rotated = 1;
+	}
+
+	// Check if we can reverse rotate B
+	if (stack->b && stack->b->next)
+	{
+		rrb(stack, 0);  // Silent rotation
+		b_rotated = 1;
+	}
+
+	// Only print if both rotations happened
+	if (print && a_rotated && b_rotated)
+		printf("rrr\n");
+	else if (print)
+	{
+		// Undo partial rotation if only one stack was rotated
+		if (a_rotated)
+			ra(stack, 0);
+		if (b_rotated)
+			rb(stack, 0);
+	}
 }
