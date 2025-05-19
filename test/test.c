@@ -6,7 +6,7 @@
 /*   By: dlorenzo <dlorenzo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:28:08 by dlorenzo          #+#    #+#             */
-/*   Updated: 2025/05/19 19:28:42 by dlorenzo         ###   ########.fr       */
+/*   Updated: 2025/05/19 20:17:49 by dlorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,35 +58,35 @@ void	print_stack_index(t_stack_node *stack, const char *name)
  */
 void	print_stack_binary_index(t_stack_node *stack, const char *name)
 {
-    printf("%s: ", name);
-    while (stack)
-    {
-        printf("%s ", stack->binary_index); // or use get_stack_binary_index(stack) if you have a getter
-        stack = stack->next;
-    }
-    printf("\n");
+	printf("%s: ", name);
+	while (stack)
+	{
+		printf("%s ", stack->binary_index); // or use get_stack_binary_index(stack) if you have a getter
+		stack = stack->next;
+	}
+	printf("\n");
 }
 
 void	print_stack_binary_length(t_stack_node *stack, const char *name)
 {
-    printf("%s: ", name);
-    while (stack)
-    {
-        printf("%d ", stack->binary_length); // or use get_stack_binary_index(stack) if you have a getter
-        stack = stack->next;
-    }
-    printf("\n");
+	printf("%s: ", name);
+	while (stack)
+	{
+		printf("%d ", stack->binary_length); // or use get_stack_binary_index(stack) if you have a getter
+		stack = stack->next;
+	}
+	printf("\n");
 }
 
 void	print_stack_max_index(t_stack_node *stack, const char *name)
 {
-    printf("%s: ", name);
-    while (stack)
-    {
-        printf("%d ", stack->max_index); // or use get_stack_binary_index(stack) if you have a getter
-        stack = stack->next;
-    }
-    printf("\n");
+	printf("%s: ", name);
+	while (stack)
+	{
+		printf("%d ", stack->max_index); // or use get_stack_binary_index(stack) if you have a getter
+		stack = stack->next;
+	}
+	printf("\n");
 }
 
 /**
