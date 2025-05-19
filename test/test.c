@@ -6,7 +6,7 @@
 /*   By: dlorenzo <dlorenzo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:28:08 by dlorenzo          #+#    #+#             */
-/*   Updated: 2025/05/07 22:16:48 by dlorenzo         ###   ########.fr       */
+/*   Updated: 2025/05/19 19:28:42 by dlorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,46 @@ void	print_stack_index(t_stack_node *stack, const char *name)
 		stack = stack->next;
 	}
 	printf("\n");
+}
+
+/**
+ * print_stack_binary_index - Prints the binary index of a stack.
+ * @stack: Pointer to the head of the stack (linked list).
+ * @name: Name of the stack to be printed (e.g., "A" or "B").
+ *
+ * Iterates through stack & prints each element's binary_index, followed by a newline.
+ */
+void	print_stack_binary_index(t_stack_node *stack, const char *name)
+{
+    printf("%s: ", name);
+    while (stack)
+    {
+        printf("%s ", stack->binary_index); // or use get_stack_binary_index(stack) if you have a getter
+        stack = stack->next;
+    }
+    printf("\n");
+}
+
+void	print_stack_binary_length(t_stack_node *stack, const char *name)
+{
+    printf("%s: ", name);
+    while (stack)
+    {
+        printf("%d ", stack->binary_length); // or use get_stack_binary_index(stack) if you have a getter
+        stack = stack->next;
+    }
+    printf("\n");
+}
+
+void	print_stack_max_index(t_stack_node *stack, const char *name)
+{
+    printf("%s: ", name);
+    while (stack)
+    {
+        printf("%d ", stack->max_index); // or use get_stack_binary_index(stack) if you have a getter
+        stack = stack->next;
+    }
+    printf("\n");
 }
 
 /**
@@ -203,10 +243,57 @@ void	test_sort_medium(void)
 	free_stack(&stack);
 }
 
+void	test_sort_large(void)
+{
+	t_stack	stack;
+	//int		nums_a[] = {-22, 33, 11, 55, 44, 77, 99, 88, 66, 22, 0, -11, -33, -55, -44, -77, -99, -88, -66, -42, -100};
+	int		nums_a[] = {-22, 33, 11, 55, 44, 77, 99, 88, 66, 22, 0, -11, -33, -55, -44, -77, -99, -88, -66, -42, -100, 100, 200, 300, 400, 500, 600, 700, 800, 900};
+
+	// Initialize stack
+	stack.a = NULL;
+	stack.b = NULL;
+	for (int i = 0; i < array_length(nums_a, sizeof(nums_a)); i++)
+		stack_add_back(&stack.a, new_stack_node(nums_a[i]));
+
+	printf("Before sort:\n");
+	print_stack(stack.a, "A");
+
+	// Normalize stack
+	normalize_stack(stack.a);
+	printf("Normalized stack index:\n");
+	print_stack_index(stack.a, "A");
+
+	// Convert stack A to binary representation
+	convert_to_binary(stack.a);
+	printf("Normalized stack binary index:\n");
+	print_stack_binary_index(stack.a, "A");
+
+	// Set binary length
+	set_binary_index_len(stack.a);
+	printf("Binary length:\n");
+	print_stack_binary_length(stack.a, "A");
+
+	// Set max index
+	set_max_index(stack.a);
+	printf("Max index:\n");
+	print_stack_max_index(stack.a, "A");
+
+	sort_large(&stack, array_length(nums_a, sizeof(nums_a)));
+
+	printf("\n");
+	printf("After sort:\n");
+	print_stack(stack.a, "A");
+	printf("Normalized stack index:\n");
+	print_stack_index(stack.a, "A");
+
+	free_stack(&stack);
+}
+
 // Add more test functions...
 
 int	main(void)
 {
+/*
 	printf("=== Testing stack operations ===\n");
 	test_stack_operations();
 
@@ -215,6 +302,10 @@ int	main(void)
 
 	printf("\n=== Testing medium sort ===\n");
 	test_sort_medium();
+*/
+
+	printf("\n=== Testing large sort ===\n");
+	test_sort_large();
 
 	// Add more test calls...
 

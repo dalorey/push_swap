@@ -6,7 +6,7 @@
 /*   By: dlorenzo <dlorenzo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:27:11 by dlorenzo          #+#    #+#             */
-/*   Updated: 2025/05/07 21:37:57 by dlorenzo         ###   ########.fr       */
+/*   Updated: 2025/05/19 18:58:51 by dlorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ typedef struct s_stack_node
 {
 	int					value;	// Original input value
 	int					index;	// Normalized index
+	int					max_index;	// Maximum index in the stack
+	char				*binary_index;	// Normalized index in binary
+	int					binary_length;	// Length of the binary index
 	struct s_stack_node	*next;	// Required for operations
 	struct s_stack_node	*prev;	// Required for reverse ops (rra, rrb)
 }	t_stack_node;
@@ -62,6 +65,9 @@ void			sort_large(t_stack *stack, int size);
 t_stack_node	*create_stack(int argc, char **argv);
 t_stack_node	*new_stack_node(int value);
 void			normalize_stack(t_stack_node *stack);
+void			convert_to_binary(t_stack_node *stack);
+void			set_binary_index_len(t_stack_node *node);
+void			set_max_index(t_stack_node *node);
 int				get_stack_value(t_stack_node *node);
 int				get_stack_index(t_stack_node *node);
 void			set_stack_value(t_stack_node *node, int value);
@@ -82,5 +88,11 @@ int				get_position(t_stack_node *stack, int index);
 int				calculate_moves(t_stack_node *stack, int pos);
 void			calculate_and_execute_best_move(t_stack *stack);
 int				calculate_insertion_cost(t_stack *stack, int index);
+
+// Test
+void			print_stack(t_stack_node *stack, const char *name);
+void			print_stack_index(t_stack_node *stack, const char *name);
+void			print_stack_binary_index(t_stack_node *stack, const char *name);
+void			print_stack_binary_length(t_stack_node *stack, const char *name);
 
 #endif

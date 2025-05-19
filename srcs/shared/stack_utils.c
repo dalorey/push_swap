@@ -6,7 +6,7 @@
 /*   By: dlorenzo <dlorenzo@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 19:53:01 by dlorenzo          #+#    #+#             */
-/*   Updated: 2025/05/07 22:00:50 by dlorenzo         ###   ########.fr       */
+/*   Updated: 2025/05/19 18:20:08 by dlorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,85 @@ void	normalize_stack(t_stack_node *stack)
 		tmp = sorted->next;
 		free(sorted);
 		sorted = tmp;
+	}
+}
+
+static char	*int_to_binary_str(int n)
+{
+	char	*str;
+	int		len = sizeof(int) * 8;
+	int		i = 0;
+	int		start = 0;
+
+	str = malloc(len + 1);
+	if (!str)
+		return (NULL);
+	for (i = 0; i < len; i++)
+		str[i] = ((n >> (len - 1 - i)) & 1) + '0';
+	str[len] = '\0';
+	// Skip leading zeros
+	while (str[start] == '0' && start < len - 1)
+		start++;
+	return (str + start);
+}
+
+/**
+ * convert_to_binary - Sets the binary_index field of each node to the integer value
+ *                     of its index, interpreted as a binary number.
+ * @stack: Pointer to the head of the stack (linked list).
+ *
+ * For each node, binary_index will be set to the same value as index.
+ * If you want to store the actual binary string, you need to change the type.
+ */
+void	convert_to_binary(t_stack_node *stack)
+{
+    while (stack)
+    {
+        if (stack->binary_index)
+            free(stack->binary_index);
+        stack->binary_index = int_to_binary_str(stack->index);
+        stack = stack->next;
+    }
+}
+
+void	set_binary_index_len(t_stack_node *node)
+{
+	int	len;
+	int	digits;
+
+	len = 0;
+	digits = 0;
+	while (node->next)
+	{
+		node = node->next;
+		len++;
+	}
+	while (len > 0)
+	{
+		len /= 2;
+		digits++;
+	}
+	while (node)
+	{
+		node->binary_length = digits;
+		node = node->prev;
+	}
+}
+
+void	set_max_index(t_stack_node *node)
+{
+	int	max_index;
+
+	max_index = 0;
+	while (node->next)
+	{
+		node = node->next;
+		max_index++;
+	}
+	while (node)
+	{
+		node->max_index = max_index;
+		node = node->prev;
 	}
 }
 
